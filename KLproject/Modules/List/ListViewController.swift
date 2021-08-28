@@ -40,49 +40,92 @@ final class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTitle()
         setupView()
-        fetchData()
     }
     
     // MARK: - Setup view -
     
     private func setupView() {
-        title = "Github repositories"
         navigationController?.navigationBar.barTintColor = AppColor.background
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: AppColor.text ?? UIColor.white]
         navigationItem.backButtonDisplayMode = .minimal
         navigationController?.navigationBar.isTranslucent = false
         
         contentView.delegate = self
+        
+        contentView.tableView.dataSource = self
+        contentView.tableView.delegate = self
+        contentView.tableView.register(
+            ListItemTableViewCell.self,
+            forCellReuseIdentifier: ListItemTableViewCell.className)
+
+    }
+    
+    private func setupTitle() {
+        title = "Github repositories (\(viewModel.repositoriesData.count))"
     }
     
     // MARK: - Data methods -
     
-    private func fetchData() {
-        ///contentView.showActivityIndicator(true)
+    private func fetchData(withText text: String) {
+        contentView.showActivityIndicator(true)
         
         viewModel.fetchData { [weak self] errorText in
             DispatchQueue.main.async {
-                ///self?.contentView.showActivityIndicator(false)
+                self?.contentView.showActivityIndicator(false)
                 
                 if let errorText = errorText {
                     self?.delegate?.showAlert(
                         title: "Data dwonloading problem!",
                         message: errorText,
                         errorHandler: {
-                            self?.fetchData()
+                            self?.fetchData(withText: text)
                         })
                 } else {
-                    print(self?.viewModel.repositoriesData.count)
-                    ///self?.contentView.tableView.reloadData()
+                    self?.setupTitle()
+                    self?.presentData()
                 }
             }
         }
     }
+    
+    private func presentData() {
+        contentView.isDataPlaceholderHidden = !viewModel.repositoriesData.isEmpty
+        contentView.tableView.reloadData()
+    }
 }
+
+// MARK: - ListViewDelegate methods -
 
 extension ListViewController: ListViewDelegate {
     func didTypeSearchText(_ text: String) {
-        print(text)
+        fetchData(withText: text)
     }
 }
+
+// MARK: - TableView data source methods -
+
+extension ListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.repositoriesData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = contentView.tableView.dequeueReusableCell(withIdentifier: ListItemTableViewCell.className, for: indexPath) as? ListItemTableViewCell
+        else { return UITableViewCell() }
+        let cellText = viewModel.repositoriesData[indexPath.row].name
+        cell.configure(withText: cellText)
+        return cell
+    }
+}
+
+// MARK: - TableView delegate methods -
+
+extension ListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let repoData = viewModel.repositoriesData[indexPath.row]
+        print(repoData.name, repoData.url)
+    }
+}
+

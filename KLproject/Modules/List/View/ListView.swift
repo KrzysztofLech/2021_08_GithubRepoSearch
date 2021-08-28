@@ -16,6 +16,12 @@ final class ListView: UIView {
     
     weak var delegate: ListViewDelegate?
     
+    var isDataPlaceholderHidden = true {
+        willSet {
+            tableView.backgroundView = newValue ? nil : noDataPlaceholderLabel
+        }
+    }
+    
     // MARK: - UI Components -
     
     private let searchTextField: UITextField = {
@@ -45,6 +51,29 @@ final class ListView: UIView {
         return view
     }()
     
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.hidesWhenStopped = true
+        view.color = AppColor.text
+        return view
+    }()
+    
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        return tableView
+    }()
+    
+    private let noDataPlaceholderLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 24, weight: .light)
+        label.textColor =  AppColor.text
+        label.text = "No data"
+        return label
+    }()
+
     // MARK: - Lifecycle -
     
     override init(frame: CGRect) {
@@ -67,6 +96,8 @@ final class ListView: UIView {
         searchTextField.delegate = self
         
         refreshSearchButton()
+        
+        isDataPlaceholderHidden = false
     }
     
     // MARK: - Layout -
@@ -93,6 +124,17 @@ final class ListView: UIView {
             make.left.right.equalToSuperview()
             make.height.equalTo(1)
         }
+        
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(separatorView.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+        
+        addSubview(activityIndicatorView)
+        activityIndicatorView.snp.makeConstraints { make in
+            make.center.equalTo(tableView)
+        }
     }
     
     // MARK: - Actions -
@@ -114,6 +156,18 @@ final class ListView: UIView {
         guard let text = searchTextField.text else { return }
         searchTextField.resignFirstResponder()
         delegate?.didTypeSearchText(text)
+    }
+    
+    // MARK: - Public methods -
+    
+    func showActivityIndicator(_ show: Bool) {
+        if show {
+            activityIndicatorView.startAnimating()
+        } else {
+            activityIndicatorView.stopAnimating()
+        }
+        
+        tableView.isHidden = show
     }
 }
 
