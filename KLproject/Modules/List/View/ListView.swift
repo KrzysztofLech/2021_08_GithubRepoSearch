@@ -62,6 +62,7 @@ final class ListView: UIView {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = AppColor.background
         return tableView
     }()
     
@@ -106,7 +107,7 @@ final class ListView: UIView {
         addSubview(searchTextField)
         searchTextField.snp.makeConstraints { make in
             make.top.equalTo(self.snp_topMargin)
-            make.left.equalToSuperview().offset(16)
+            make.left.equalToSuperview().offset(20)
             make.height.equalTo(50)
         }
         

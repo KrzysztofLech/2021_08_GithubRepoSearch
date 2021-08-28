@@ -63,15 +63,15 @@ final class ListViewController: UIViewController {
     }
     
     private func setupTitle() {
-        title = "Github repositories (\(viewModel.repositoriesData.count))"
+        title = viewModel.title
     }
     
     // MARK: - Data methods -
     
-    private func fetchData(withText text: String) {
+    private func fetchData(withPhrase phrase: String) {
         contentView.showActivityIndicator(true)
         
-        viewModel.fetchData { [weak self] errorText in
+        viewModel.fetchData(withPhrase: phrase) { [weak self] errorText in
             DispatchQueue.main.async {
                 self?.contentView.showActivityIndicator(false)
                 
@@ -80,7 +80,7 @@ final class ListViewController: UIViewController {
                         title: "Data dwonloading problem!",
                         message: errorText,
                         errorHandler: {
-                            self?.fetchData(withText: text)
+                            self?.fetchData(withPhrase: phrase)
                         })
                 } else {
                     self?.setupTitle()
@@ -100,7 +100,7 @@ final class ListViewController: UIViewController {
 
 extension ListViewController: ListViewDelegate {
     func didTypeSearchText(_ text: String) {
-        fetchData(withText: text)
+        fetchData(withPhrase: text)
     }
 }
 
@@ -114,8 +114,8 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = contentView.tableView.dequeueReusableCell(withIdentifier: ListItemTableViewCell.className, for: indexPath) as? ListItemTableViewCell
         else { return UITableViewCell() }
-        let cellText = viewModel.repositoriesData[indexPath.row].name
-        cell.configure(withText: cellText)
+        let cellData = viewModel.repositoriesData[indexPath.row]
+        cell.configure(withName: cellData.name, andDescription: cellData.description)
         return cell
     }
 }

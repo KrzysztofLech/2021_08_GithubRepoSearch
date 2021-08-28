@@ -8,19 +8,21 @@
 import UIKit
 
 protocol DataServiceProtocol {
-    func fetchData(completion: @escaping (Result<GithubSearchResults, ErrorResult>) -> ())
+    func fetchData(withQuery query: String, completion: @escaping (Result<GithubSearchResults, ErrorResult>) -> ())
 }
 
 final class DataService: DataServiceProtocol {
     
     private enum Constants {
-        static let endpoint = "https://api.github.com/search/repositories?q=2018-07_ISS-Location"
+        static let endpoint = "https://api.github.com/search/repositories"
     }
     
     private var downloadTask: URLSessionDownloadTask?
     
-    func fetchData(completion: @escaping (Result<GithubSearchResults, ErrorResult>) -> ()) {
-        guard let url = URL(string: Constants.endpoint) else {
+    func fetchData(withQuery query: String, completion: @escaping (Result<GithubSearchResults, ErrorResult>) -> ()) {
+        let urlString = Constants.endpoint + "?q=" + query
+        
+        guard let url = URL(string: urlString) else {
             completion(.failure(.url))
             return
         }

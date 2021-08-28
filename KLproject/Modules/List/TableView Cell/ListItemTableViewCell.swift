@@ -14,7 +14,7 @@ final class ListItemTableViewCell: UITableViewCell {
     
     private enum Constants {
         static let containerPadding: CGFloat = 20
-        static let labelPadding: CGFloat = 16
+        static let innerPadding: CGFloat = 8
         static let height: CGFloat = 60
     }
     
@@ -27,10 +27,19 @@ final class ListItemTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let label: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18, weight: .light)
+        label.textColor =  AppColor.cellContent
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.textColor =  AppColor.cellContent
         label.numberOfLines = 0
         return label
@@ -60,7 +69,8 @@ final class ListItemTableViewCell: UITableViewCell {
     
     private func defineLayout() {
         addContainerView()
-        addLabel()
+        addNameLabel()
+        addDescriptionLabel()
     }
     
     private func addContainerView() {
@@ -73,17 +83,27 @@ final class ListItemTableViewCell: UITableViewCell {
         }
     }
     
-    private func addLabel() {
-        containerView.addSubview(label)
-        label.snp.makeConstraints { make in
+    private func addNameLabel() {
+        containerView.addSubview(nameLabel)
+        nameLabel.snp.makeConstraints { make in
             make.top.left.equalTo(Constants.containerPadding)
+            make.right.equalTo(-Constants.containerPadding)
+        }
+    }
+    
+    private func addDescriptionLabel() {
+        containerView.addSubview(descriptionLabel)
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(Constants.innerPadding)
+            make.left.equalTo(Constants.containerPadding)
             make.right.bottom.equalTo(-Constants.containerPadding)
         }
     }
     
     // MARK: - Public methods -
     
-    func configure(withText text: String) {
-        label.text = text
+    func configure(withName text: String, andDescription description: String?) {
+        nameLabel.text = text
+        descriptionLabel.text = description
     }
 }
