@@ -45,5 +45,18 @@ final class ListViewController: UIViewController {
     // MARK: - Setup view -
     
     private func setupView() {
+        title = "Github repositories"
+        navigationController?.navigationBar.barTintColor = AppColor.background
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: AppColor.text ?? UIColor.white]
+        navigationItem.backButtonDisplayMode = .minimal
+        navigationController?.navigationBar.isTranslucent = false
+        
+        contentView.delegate = self
+    }
+}
+
+extension ListViewController: ListViewDelegate {
+    func didTypeSearchText(_ text: String) {
+        print(text)
     }
 }

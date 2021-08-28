@@ -10,6 +10,8 @@
 		6B05604226DA2F600018E62F /* ErrorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05604126DA2F600018E62F /* ErrorResult.swift */; };
 		6B05604426DA65650018E62F /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05604326DA65650018E62F /* DataService.swift */; };
 		6B05604A26DA688C0018E62F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6B05604926DA688C0018E62F /* SnapKit */; };
+		6B05604B26DA6EEE0018E62F /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B05604626DA67860018E62F /* ColorAssets.xcassets */; };
+		6B05604C26DA6EF20018E62F /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05604726DA67860018E62F /* AppColors.swift */; };
 		6B31875126DA2A1F00D27501 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875026DA2A1F00D27501 /* RootCoordinator.swift */; };
 		6B31875526DA2AFF00D27501 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875426DA2AFF00D27501 /* ListViewController.swift */; };
 		6B31875826DA2B8400D27501 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875726DA2B8400D27501 /* ListViewModel.swift */; };
@@ -213,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BF4FB5126DA28810087D6FD /* LaunchScreen.storyboard in Resources */,
+				6B05604B26DA6EEE0018E62F /* ColorAssets.xcassets in Resources */,
 				6BF4FB4E26DA28810087D6FD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B05604C26DA6EF20018E62F /* AppColors.swift in Sources */,
 				6B31875826DA2B8400D27501 /* ListViewModel.swift in Sources */,
 				6BF4FB4526DA28800087D6FD /* AppDelegate.swift in Sources */,
 				6B31875A26DA2BCE00D27501 /* ListView.swift in Sources */,
