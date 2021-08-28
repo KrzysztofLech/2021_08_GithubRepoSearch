@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ListViewControllerDelegate: AnyObject {
+    func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
 }
 
 final class ListViewController: UIViewController {
@@ -40,6 +41,7 @@ final class ListViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
+        fetchData()
     }
     
     // MARK: - Setup view -
@@ -52,6 +54,30 @@ final class ListViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         contentView.delegate = self
+    }
+    
+    // MARK: - Data methods -
+    
+    private func fetchData() {
+        ///contentView.showActivityIndicator(true)
+        
+        viewModel.fetchData { [weak self] errorText in
+            DispatchQueue.main.async {
+                ///self?.contentView.showActivityIndicator(false)
+                
+                if let errorText = errorText {
+                    self?.delegate?.showAlert(
+                        title: "Data dwonloading problem!",
+                        message: errorText,
+                        errorHandler: {
+                            self?.fetchData()
+                        })
+                } else {
+                    print(self?.viewModel.repositoriesData.count)
+                    ///self?.contentView.tableView.reloadData()
+                }
+            }
+        }
     }
 }
 
