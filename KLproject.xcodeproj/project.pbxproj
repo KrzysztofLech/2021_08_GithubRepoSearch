@@ -17,6 +17,9 @@
 		6B05605226DA7C3C0018E62F /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605126DA7C3C0018E62F /* UIView+extensions.swift */; };
 		6B05605626DA7CB90018E62F /* ListItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605526DA7CB90018E62F /* ListItemTableViewCell.swift */; };
 		6B05605826DA8F970018E62F /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605726DA8F970018E62F /* String+extensions.swift */; };
+		6B05605B26DAACFE0018E62F /* RepoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605A26DAACFE0018E62F /* RepoDetailsView.swift */; };
+		6B05605D26DAAD0E0018E62F /* RepoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605C26DAAD0E0018E62F /* RepoDetailsViewController.swift */; };
+		6B05605F26DAAF6D0018E62F /* RepoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B05605E26DAAF6D0018E62F /* RepoDetailsViewModel.swift */; };
 		6B31875126DA2A1F00D27501 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875026DA2A1F00D27501 /* RootCoordinator.swift */; };
 		6B31875526DA2AFF00D27501 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875426DA2AFF00D27501 /* ListViewController.swift */; };
 		6B31875826DA2B8400D27501 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B31875726DA2B8400D27501 /* ListViewModel.swift */; };
@@ -37,6 +40,9 @@
 		6B05605126DA7C3C0018E62F /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		6B05605526DA7CB90018E62F /* ListItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemTableViewCell.swift; sourceTree = "<group>"; };
 		6B05605726DA8F970018E62F /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
+		6B05605A26DAACFE0018E62F /* RepoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsView.swift; sourceTree = "<group>"; };
+		6B05605C26DAAD0E0018E62F /* RepoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsViewController.swift; sourceTree = "<group>"; };
+		6B05605E26DAAF6D0018E62F /* RepoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsViewModel.swift; sourceTree = "<group>"; };
 		6B31875026DA2A1F00D27501 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		6B31875426DA2AFF00D27501 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		6B31875726DA2B8400D27501 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +101,16 @@
 			path = "TableView Cell";
 			sourceTree = "<group>";
 		};
+		6B05605926DAACD20018E62F /* Repo Details */ = {
+			isa = PBXGroup;
+			children = (
+				6B05605A26DAACFE0018E62F /* RepoDetailsView.swift */,
+				6B05605E26DAAF6D0018E62F /* RepoDetailsViewModel.swift */,
+				6B05605C26DAAD0E0018E62F /* RepoDetailsViewController.swift */,
+			);
+			path = "Repo Details";
+			sourceTree = "<group>";
+		};
 		6B31874F26DA299700D27501 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				6B31875326DA2AB400D27501 /* List */,
+				6B05605926DAACD20018E62F /* Repo Details */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -262,12 +279,15 @@
 				6B31875826DA2B8400D27501 /* ListViewModel.swift in Sources */,
 				6BF4FB4526DA28800087D6FD /* AppDelegate.swift in Sources */,
 				6B31875A26DA2BCE00D27501 /* ListView.swift in Sources */,
+				6B05605B26DAACFE0018E62F /* RepoDetailsView.swift in Sources */,
+				6B05605D26DAAD0E0018E62F /* RepoDetailsViewController.swift in Sources */,
 				6B05604226DA2F600018E62F /* ErrorResult.swift in Sources */,
 				6B05605626DA7CB90018E62F /* ListItemTableViewCell.swift in Sources */,
 				6B31875126DA2A1F00D27501 /* RootCoordinator.swift in Sources */,
 				6B05605226DA7C3C0018E62F /* UIView+extensions.swift in Sources */,
 				6B05605826DA8F970018E62F /* String+extensions.swift in Sources */,
 				6B31875526DA2AFF00D27501 /* ListViewController.swift in Sources */,
+				6B05605F26DAAF6D0018E62F /* RepoDetailsViewModel.swift in Sources */,
 				6BF4FB4726DA28800087D6FD /* SceneDelegate.swift in Sources */,
 				6B05604426DA65650018E62F /* DataService.swift in Sources */,
 				6B05604E26DA77EA0018E62F /* GithubSearchResults.swift in Sources */,

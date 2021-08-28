@@ -43,6 +43,13 @@ final class RootCoordinator: NSObject, Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
+    
+    private func showRepoDetails(_ repoData: GitHubRepoData) {
+        let repoDetailsViewModel = RepoDetailsViewModel(repoData: repoData)
+        let repoDetailsViewController = RepoDetailsViewController(viewModel: repoDetailsViewModel)
+        repoDetailsViewController.delegate = self
+        navigationController?.pushViewController(repoDetailsViewController, animated: true)
+    }
 }
 
 // MARK: - ListViewController delegate methods -
@@ -62,5 +69,17 @@ extension RootCoordinator: ListViewControllerDelegate {
         alerController.addAction(errorAction)
         
         navigationController?.present(alerController, animated: true)
+    }
+    
+    func didSelectListItem(_ itemData: GitHubRepoData) {
+        showRepoDetails(itemData)
+    }
+}
+
+// MARK: - RepoDetailsViewController delegate methods -
+
+extension RootCoordinator: RepoDetailsViewControllerDelegate {
+    func didFailPresentingRepo() {
+        navigationController?.popViewController(animated: true)
     }
 }

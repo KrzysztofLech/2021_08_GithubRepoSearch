@@ -172,6 +172,8 @@ final class ListView: UIView {
     }
 }
 
+// MARK: - TextField delegate methods -
+
 extension ListView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendText()

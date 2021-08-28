@@ -9,6 +9,7 @@ import UIKit
 
 protocol ListViewControllerDelegate: AnyObject {
     func showAlert(title: String, message: String, errorHandler: @escaping () -> ())
+    func didSelectListItem(_ itemData: GitHubRepoData)
 }
 
 final class ListViewController: UIViewController {
@@ -125,7 +126,6 @@ extension ListViewController: UITableViewDataSource {
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let repoData = viewModel.repositoriesData[indexPath.row]
-        print(repoData.name, repoData.url)
+        delegate?.didSelectListItem(repoData)
     }
 }
-
