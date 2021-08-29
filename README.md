@@ -41,3 +41,8 @@ Podczas pobierania danych z endpointu może wydarzyć się wiele nieprzewidziany
 
 * informowanie użytkownika o każdym problemie
 * umożliwienie użytkownikowi powtórzenia akcji - powtórne wysłanie requestu
+
+## Dependencies:
+W projekcie celowo zrezygnowałem z korzystania z *CocoaPods* - dodawanie zewnętrznych bibliotek zrealizowałem poprzez **SPM**.
+
+W projekcie wykorzystana jest tylko jedna biblioteka: **SnapKit**, która wspomaga proces tworzenia widoków za pomocą kodu. Bez problemu mógłbym poradzić sobie bez niej - Apple oferuje kilka natywnych technik tworzenia autolayoutu, są one jednak trochę bardziej czasochłonne.
